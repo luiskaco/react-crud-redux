@@ -1,5 +1,27 @@
 libreria
 
 | Para las rutas
-npm react-router-dom
+npm i react-router-dom
 
+| Router dom {Link}
+Ayudar hacer instantaneo los cambios de paginas
+
+
+| Fake server - JsonServer
+https://github.com/typicode/json-server
+
+ejecutarlo : 
+ json-server db.json --port 4000
+
+ nota;  default se ejecuta en el puerto 3000
+
+
+ | Redux
+ npm i react-redux redux redux-thunk
+   - react-reduct: conecta react a redux
+   - redux: libreria en si
+   - redux-thunk: hacer uso de funciones asincronas en redux
+
+
+| Devtool redux
+https://github.com/zalmoxisus/redux-devtools-extension
