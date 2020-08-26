@@ -25,3 +25,10 @@ ejecutarlo :
 
 | Devtool redux
 https://github.com/zalmoxisus/redux-devtools-extension
+
+
+| Axios 
+npm i axios
+
+! SweetAlertt
+npm i sweetalert2

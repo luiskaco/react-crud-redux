@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { useDispatch, useSelector }  from 'react-redux';
 
 /**
@@ -9,26 +9,47 @@ import { useDispatch, useSelector }  from 'react-redux';
  */
 // action de redux
 import {crearNuevoProductoAction} from '../actions/productAction';
-    // utilizamos use dispatch y la crea una funcion
-    const dispatch = useDispatch();
+   
 
-    // Llama el accion de product accion
-    const agregarProducto = producto => dispatch( crearNuevoProductoAction(producto) );
+const NuevoProductos = ({history}) => {
+    // State del components
+    const [nombre, setguardarNombre] = useState('');
+    const [precio, setguardarPrecio] = useState(0);
 
 
-    // Cuando el usuario haga nuevo submit
-    const submitNuevoProducto = e =>{
-        e.preventDefault();
+     // utilizamos use dispatch y la crea una funcion
+     const dispatch = useDispatch();
 
-        // Validar formulario
+     // Acceder el state del store
+     const cargando = useSelector(state=>state.productos.loading);
+     const error = useSelector(state => state.productos.error);
+    // console.log(error);
 
-        // Si no hay errores
+     // Llama el accion de product accion
+     const agregarProducto = producto => dispatch( crearNuevoProductoAction(producto) );
 
-        // Crear el nuevo producto
-        agregarProducto();
-    }
+     // Cuando el usuario haga nuevo submit
+     const submitNuevoProducto = e =>{
+         e.preventDefault();
+ 
+         // Validar formulario
+        if(nombre.trim() === '' || precio ==0){
+           return; 
+        }
+         // Si no hay errores
+ 
+         // Crear el nuevo producto
+         agregarProducto({
+             nombre,
+             precio
+         });
 
-const NuevoProductos = () => {
+         // Redireccionar al home
+         history.push('/');
+         /* Cuando se tiene 
+         router-dom  se tiene acceso a estas propeidades*/
+     }
+
     return ( 
         <div className="row justify-content-center">
             <div className="col-md-8">
@@ -50,6 +71,8 @@ const NuevoProductos = () => {
                                     className="form-control"
                                     placeholder="Nombre Producto" 
                                     name="nombre"
+                                    value={nombre}
+                                    onChange={e => setguardarNombre(e.target.value)}
                                     />
                             </div>
                             <div className="form-group">
@@ -59,6 +82,8 @@ const NuevoProductos = () => {
                                     className="form-control"
                                     placeholder="Nombre Producto"
                                     name="precio"
+                                    value={precio}
+                                    onChange={e=>setguardarPrecio(Number(e.target.value))}
                                     />    
                             </div>
                             <button 
@@ -67,6 +92,8 @@ const NuevoProductos = () => {
                                     Agregar
                             </button>
                         </form>
+                        {cargando ? <p>Cargando...</p> : null}
+                        {error ? <p className="alert alert-danger p2 mt-4 text-center">Hubo un error</p>: null}
                     </div>
                 </div>
             </div>
