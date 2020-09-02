@@ -1,9 +1,11 @@
 import React, {Fragment, useEffect} from 'react'
 import Producto from '../components/single-product';
 
+
 // Redux
 import {useSelector, useDispatch} from 'react-redux';
 import {obtenerProductosAction} from '../actions/productAction'
+
 
 
 const Productos = () => {
@@ -16,6 +18,8 @@ const Productos = () => {
             dispatch(obtenerProductosAction());
         }
         cargarProducto();
+
+        // eslint-disable-next-line
     }, [])
 
 

@@ -1,64 +1,19 @@
 {
   "productos": [
     {
-      "id": 1,
-      "nombre": "Jugo de Zanahoria",
-      "precio": "31111"
-    },
-    {
-      "id": 2,
-      "nombre": "Jugo de Naranja",
-      "precio": "1"
-    },
-    {
-      "nombre": "Jugo de Naranja",
-      "precio": "300",
-      "id": 3
-    },
-    {
-      "nombre": "Rib Eye 800g",
-      "precio": "200",
-      "id": 4
-    },
-    {
-      "nombre": "Jugo de Fresa",
-      "precio": "200",
-      "id": 5
-    },
-    {
-      "nombre": "Probando",
-      "precio": 34,
-      "id": 6
-    },
-    {
-      "nombre": "Luis Gomez",
-      "precio": 3234,
-      "id": 7
-    },
-    {
-      "nombre": "Hola",
-      "precio": 30,
-      "id": 8
-    },
-    {
-      "nombre": "Luis Gomez",
-      "precio": 4230,
-      "id": 9
-    },
-    {
-      "nombre": "Jugo de piña",
-      "precio": 100,
-      "id": 10
-    },
-    {
-      "nombre": "Hola mundo",
-      "precio": 30,
+      "nombre": "Hola mundo 2",
+      "precio": "37",
       "id": 11
     },
     {
       "nombre": "Jugo de guayaba",
-      "precio": 10,
+      "precio": "20",
       "id": 12
+    },
+    {
+      "nombre": "Guayaba",
+      "precio": 23,
+      "id": 13
     }
   ]
 }

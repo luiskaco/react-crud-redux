@@ -5,7 +5,13 @@ import {
     AGREGAR_PRODUCTO_ERROR,
     COMENZAR_DESCARGA_PRODUCTOS,
     DESCARGA_PRODUCTOS_EXITO,
-    DESCARGA_PRODUCTOS_ERROR
+    DESCARGA_PRODUCTOS_ERROR,
+    OBTENER_PRODUCTO_ELIMINAR,
+    PRODUCTO_ELIMINADO_EXITO,
+    PRODUCTO_ELIMINADO_ERROR,
+    OBTENER_PRODUCTO_EDITAR,
+    PRODUCTO_EDITADO_EXITO,
+    PRODUCTO_EDITADO_ERROR
 } from '../types';
 
 //Nota: Accion son las funciones que modifican el State
@@ -90,7 +96,7 @@ const descargarProductos = () =>({
     payload:true
 });
 
-const descargaProductosExitosa = productos =>(console.log(productos),
+const descargaProductosExitosa = productos =>(/*console.log(productos),*/
    {
        type: DESCARGA_PRODUCTOS_EXITO,
        payload:productos
@@ -106,3 +112,86 @@ const descargaProductosError  = () =>({
     Las api json server dan errores extraños para ser manipulados
 */
 
+
+// Seleciona y elimina el prodcuto 
+export function borrarProductoAction(id){
+    return async (dispatch) => {
+        dispatch(obtenerProductoEliminar(id));
+      //  console.log(id);
+
+        try {
+            await clienteAxios.delete(`/productos/${id}`);
+            //console.log(resultado);
+            dispatch(eliminarProductoExito());
+
+            Swal.fire(
+                'Eliminado!',
+                'El producto se eliminó correctamente.',
+                'success'
+              )
+        } catch (error) {
+            console.log(error);
+            dispatch(eliminarProductoError());
+        }
+    }
+}
+
+const obtenerProductoEliminar = id =>({
+    type:OBTENER_PRODUCTO_ELIMINAR,
+    payload:id
+});
+
+const eliminarProductoExito = () =>({
+    type: PRODUCTO_ELIMINADO_EXITO,
+  
+})
+
+const eliminarProductoError = () =>({
+    type: PRODUCTO_ELIMINADO_ERROR,
+    payload:true
+});
+
+
+/* COLOCAR PRODUCTO EN EDICION*/
+
+export function obtenerProductoEditar(producto){
+    return (dispatch) =>{
+        dispatch(obtenerProductoEditarAction(producto));
+    }
+}
+
+const obtenerProductoEditarAction = producto => ({
+    type:OBTENER_PRODUCTO_EDITAR,
+    payload:producto
+})
+
+// Esta un registro en la api y en el state
+export function editarProductoAction(producto){
+    return async (dispatch) => {
+           //dispatch(editarProducto());
+           
+           try {
+              await clienteAxios.put(`/productos/${producto.id}`, producto);
+
+              dispatch(editarPRoductoExito(producto));
+            } catch (error) {
+                console.log(error);
+                dispatch(editarProductoError());
+            }
+    }
+}
+
+/*const editarProducto = () =>({
+    type:COMENZAR_EDICION_PRODUCTO,
+    
+})*/
+
+const editarPRoductoExito = producto => ({
+    type:PRODUCTO_EDITADO_EXITO,
+    payload: producto
+})
+
+const editarProductoError = () =>({
+    type: PRODUCTO_EDITADO_ERROR,
+    payload: true
+})
